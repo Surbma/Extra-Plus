@@ -33,6 +33,7 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php do_action( 'extra_plus_body' ); ?>
 	<div id="page-container">
 		<?php $header_vars = extra_get_header_vars(); ?>
 <?php
