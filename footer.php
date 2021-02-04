@@ -7,6 +7,17 @@
 	</div>
 	<?php } ?>
 
+	<?php
+	/**
+	 * Fires after the main content, before the footer is output.
+	 *
+	 * @since Divi 3.10
+	 *
+	 * This is not part of the Extra theme, copied from Divi theme by Surbma
+	 */
+	do_action( 'et_after_main_content' );
+	?>
+
 	<footer id="footer" class="<?php extra_footer_classes(); ?>">
 		<?php get_sidebar( 'footer' ); ?>
 		<div id="footer-bottom">
