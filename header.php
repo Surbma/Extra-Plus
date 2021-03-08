@@ -33,8 +33,14 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<?php do_action( 'extra_plus_body' ); ?>
-	<div id="page-container">
+<?php
+	wp_body_open();
+
+	if ( et_builder_is_product_tour_enabled() ) {
+		return;
+	}
+?>
+	<div id="page-container" class="page-container">
 		<?php $header_vars = extra_get_header_vars(); ?>
 <?php
 	if ( is_page_template( 'page-template-landing.php' ) ) {
@@ -114,7 +120,7 @@
 							<?php foreach ( $social_icons as $social_icon => $social_icon_title ) { ?>
 								<?php $social_icon = esc_attr( $social_icon ); ?>
 								<?php $social_icon_url = et_get_option( sprintf( '%s_url', $social_icon ), '' ); ?>
-								<?php if ( '' != $social_icon_url ) { ?>
+								<?php if ( '' != $social_icon_url && 'on' === et_get_option( "show_{$social_icon}_icon", 'on' ) ) { ?>
 								<li class="et-extra-social-icon <?php echo $social_icon; ?>">
 									<a href="<?php echo esc_url( $social_icon_url ); ?>" class="et-extra-icon et-extra-icon-background-hover et-extra-icon-<?php echo $social_icon; ?>"></a>
 								</li>
@@ -155,7 +161,7 @@
 
 						<?php
 						$logo = ( $user_logo = et_get_option( 'extra_logo' ) ) && '' != $user_logo ? $user_logo : $template_directory_uri . '/images/logo.svg';
-						$show_logo = extra_customizer_el_visible( extra_get_dynamic_selector( 'logo' ) );
+						$show_logo = extra_customizer_el_visible( extra_get_dynamic_selector( 'logo' ) ) || is_customize_preview();
 						if ( $show_logo ) {
 						?>
 
