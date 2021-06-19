@@ -162,12 +162,21 @@
 						<?php
 						$logo = ( $user_logo = et_get_option( 'extra_logo' ) ) && '' != $user_logo ? $user_logo : $template_directory_uri . '/images/logo.svg';
 						$show_logo = extra_customizer_el_visible( extra_get_dynamic_selector( 'logo' ) ) || is_customize_preview();
+
 						if ( $show_logo ) {
+							// Get logo image size based on attachment URL.
+							$logo_size   = et_get_attachment_size_by_url( $logo );
+							$logo_width  = ( ! empty( $logo_size ) && is_numeric( $logo_size[0] ) )
+									? $logo_size[0]
+									: '300'; // 300 is the width of the default logo.
+							$logo_height = ( ! empty( $logo_size ) && is_numeric( $logo_size[1] ) )
+									? $logo_size[1]
+									: '81'; // 81 is the height of the default logo.
 						?>
 
 						<!-- Logo -->
 						<a class="logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" data-fixed-height="<?php echo esc_attr( et_get_option( 'fixed_nav_logo_height', '51' ) ); ?>">
-							<img src="<?php echo esc_attr( $logo ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" id="logo" />
+							<img src="<?php echo esc_attr( $logo ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" id="logo" />
 						</a>
 
 						<?php
