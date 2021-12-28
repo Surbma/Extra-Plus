@@ -1,11 +1,20 @@
-<?php $footer_above_ad = extra_display_ad( 'footer_above', false ); ?>
-	<?php if ( !empty( $footer_above_ad ) ) { ?>
-	<div class="container">
-		<div class="et_pb_extra_row etad footer_above">
-			<?php echo $footer_above_ad; ?>
-		</div>
+<?php // phpcs:disable Squiz.Commenting.FileComment.Missing -- Not used in other templates.
+if ( et_theme_builder_overrides_layout( ET_THEME_BUILDER_HEADER_LAYOUT_POST_TYPE ) || et_theme_builder_overrides_layout( ET_THEME_BUILDER_FOOTER_LAYOUT_POST_TYPE ) ) {
+	// Skip rendering anything as this partial is being buffered anyway.
+	// In addition, avoids get_sidebar() issues since that uses
+	// locate_template() with require_once.
+	return;
+}
+
+$footer_above_ad = extra_display_ad( 'footer_above', false );
+
+if ( ! empty( $footer_above_ad ) ) { ?>
+<div class="container">
+	<div class="et_pb_extra_row etad footer_above">
+		<?php echo et_core_esc_previously( $footer_above_ad ); ?>
 	</div>
-	<?php } ?>
+</div>
+<?php } ?>
 
 	<?php
 	/**
