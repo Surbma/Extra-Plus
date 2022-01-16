@@ -120,7 +120,7 @@
 							<?php foreach ( $social_icons as $social_icon => $social_icon_title ) { ?>
 								<?php $social_icon = esc_attr( $social_icon ); ?>
 								<?php $social_icon_url = et_get_option( sprintf( '%s_url', $social_icon ), '' ); ?>
-								<?php if ( '' != $social_icon_url && 'on' === et_get_option( "show_{$social_icon}_icon", 'on' ) ) { ?>
+								<?php if ( ! empty( $social_icon_url ) && 'on' === et_get_option( "show_{$social_icon}_icon", 'on' ) ) { ?>
 								<li class="et-extra-social-icon <?php echo $social_icon; ?>">
 									<a href="<?php echo esc_url( $social_icon_url ); ?>" class="et-extra-icon et-extra-icon-background-hover et-extra-icon-<?php echo $social_icon; ?>"></a>
 								</li>
